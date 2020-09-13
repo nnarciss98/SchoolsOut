@@ -1,16 +1,20 @@
-package be.wyrthh.data;
+package be.wyrthh.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import be.wyrthh.data.Gender;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "person")
 public class Person {
 
     @Id
+    @GeneratedValue
     int id;
     String firstName;
     String familyName;
     Gender gender;
+    @ManyToOne
     Course course;
 
     /* Getters for Person */
@@ -37,23 +41,28 @@ public class Person {
 
     /* Setters for person */
 
-    public void setId(int id) {
+    public Person setId(int id) {
         this.id = id;
+        return this;
     }
 
-    public void setFirstName(String firstName) {
+    public Person setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
-    public void setFamilyName(String familyName) {
+    public Person setFamilyName(String familyName) {
         this.familyName = familyName;
+        return this;
     }
 
-    public void setGender(Gender gender) {
+    public Person setGender(Gender gender) {
         this.gender = gender;
+        return this;
     }
 
-    public void setCourse(Course course) {
+    public Person setCourse(Course course) {
         this.course = course;
+        return this;
     }
 }

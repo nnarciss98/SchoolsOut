@@ -880,5 +880,255 @@
 ALL PRIVILEGES|narcis:null
 </ObjectGrants>
     </user>
+    <table id="278" parent="4" name="course"/>
+    <table id="279" parent="4" name="course_exam"/>
+    <table id="280" parent="4" name="exam"/>
+    <table id="281" parent="4" name="hibernate_sequence"/>
+    <table id="282" parent="4" name="module"/>
+    <table id="283" parent="4" name="module_exam"/>
+    <table id="284" parent="4" name="person"/>
+    <table id="285" parent="4" name="user"/>
+    <column id="286" parent="278" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="287" parent="278" name="active">
+      <Position>2</Position>
+      <DataType>bit(1)|0s</DataType>
+    </column>
+    <column id="288" parent="278" name="code">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="289" parent="278" name="description">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="290" parent="278" name="imageURL">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="291" parent="278" name="name">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <key id="292" parent="278" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="293" parent="279" name="Course_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="294" parent="279" name="modules_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="295" parent="279" name="UK_3kfep1d5a7p4h5s7r4bo120dh">
+      <ColNames>modules_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="296" parent="279" name="FKm7m29hqekb5vh5ng5lju2x7td">
+      <ColNames>Course_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="297" parent="279" name="UK_3kfep1d5a7p4h5s7r4bo120dh">
+      <ColNames>modules_id</ColNames>
+      <UnderlyingIndexName>UK_3kfep1d5a7p4h5s7r4bo120dh</UnderlyingIndexName>
+    </key>
+    <foreign-key id="298" parent="279" name="FKm7m29hqekb5vh5ng5lju2x7td">
+      <ColNames>Course_id</ColNames>
+      <RefTableName>course</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="299" parent="279" name="FKt2mutt15bt7cbgajq659i556s">
+      <ColNames>modules_id</ColNames>
+      <RefTableName>exam</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="300" parent="280" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="301" parent="280" name="date">
+      <Position>2</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="302" parent="280" name="description">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="303" parent="280" name="name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="304" parent="280" name="total">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="305" parent="280" name="weight">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="306" parent="280" name="module_id">
+      <Position>7</Position>
+      <DataType>bigint|0s</DataType>
+    </column>
+    <index id="307" parent="280" name="FK1pc758iugwh86ymrr5h9og22p">
+      <ColNames>module_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="308" parent="280" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="309" parent="280" name="FK1pc758iugwh86ymrr5h9og22p">
+      <ColNames>module_id</ColNames>
+      <RefTableName>exam</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="310" parent="281" name="next_val">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+    </column>
+    <column id="311" parent="282" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="312" parent="282" name="description">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="313" parent="282" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="314" parent="282" name="course_id">
+      <Position>4</Position>
+      <DataType>bigint|0s</DataType>
+    </column>
+    <index id="315" parent="282" name="FKfq09oddpwjoxcirvkh9vnfnsg">
+      <ColNames>course_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="316" parent="282" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="317" parent="282" name="FKfq09oddpwjoxcirvkh9vnfnsg">
+      <ColNames>course_id</ColNames>
+      <RefTableName>course</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="318" parent="283" name="Module_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="319" parent="283" name="exams_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="320" parent="283" name="UK_b5m5sakoygc1oqgy3klkogsx">
+      <ColNames>exams_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="321" parent="283" name="FKf0qbbxerju8f4xi44jbb0e51m">
+      <ColNames>Module_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="322" parent="283" name="UK_b5m5sakoygc1oqgy3klkogsx">
+      <ColNames>exams_id</ColNames>
+      <UnderlyingIndexName>UK_b5m5sakoygc1oqgy3klkogsx</UnderlyingIndexName>
+    </key>
+    <foreign-key id="323" parent="283" name="FKf0qbbxerju8f4xi44jbb0e51m">
+      <ColNames>Module_id</ColNames>
+      <RefTableName>module</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="324" parent="283" name="FKfx40qbc6segioemjphimwb2lf">
+      <ColNames>exams_id</ColNames>
+      <RefTableName>exam</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="325" parent="284" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="326" parent="284" name="familyName">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="327" parent="284" name="firstName">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="328" parent="284" name="gender">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="329" parent="284" name="course_id">
+      <Position>5</Position>
+      <DataType>bigint|0s</DataType>
+    </column>
+    <index id="330" parent="284" name="FKoagostl97cul2pd73a1gvuvrh">
+      <ColNames>course_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="331" parent="284" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="332" parent="284" name="FKoagostl97cul2pd73a1gvuvrh">
+      <ColNames>course_id</ColNames>
+      <RefTableName>course</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="333" parent="285" name="login">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="334" parent="285" name="active">
+      <Position>2</Position>
+      <DataType>bit(1)|0s</DataType>
+    </column>
+    <column id="335" parent="285" name="passwordHash">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="336" parent="285" name="person_id">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="337" parent="285" name="FKir5g7yucydevmmc84i788jp79">
+      <ColNames>person_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="338" parent="285" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>login</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="339" parent="285" name="FKir5g7yucydevmmc84i788jp79">
+      <ColNames>person_id</ColNames>
+      <RefTableName>person</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

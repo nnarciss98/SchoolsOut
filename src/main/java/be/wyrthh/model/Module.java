@@ -1,17 +1,20 @@
-package be.wyrthh.data;
+package be.wyrthh.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "module")
 public class Module {
 
     @Id
+    @GeneratedValue
     long id;
     String name;
     String description;
+    @ManyToOne
     Course course;
+    @OneToMany
     List<Exam> exams;
 
     /* Getters for the Module object */
@@ -38,23 +41,28 @@ public class Module {
 
     /* Setters for the Module object */
 
-    public void setId(long id) {
+    public Module setId(long id) {
         this.id = id;
+        return this;
     }
 
-    public void setName(String name) {
+    public Module setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void setDescription(String description) {
+    public Module setDescription(String description) {
         this.description = description;
+        return this;
     }
 
-    public void setCourse(Course course) {
+    public Module setCourse(Course course) {
         this.course = course;
+        return this;
     }
 
-    public void setExams(List<Exam> exams) {
+    public Module setExams(List<Exam> exams) {
         this.exams = exams;
+        return this;
     }
 }

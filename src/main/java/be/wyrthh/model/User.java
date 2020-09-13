@@ -1,16 +1,17 @@
-package be.wyrthh.data;
+package be.wyrthh.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
-    String login;
-    String passwordHash;
-    Boolean active;
-    Person person;
+    private String login;
+    private String passwordHash;
+    private Boolean active;
+    @OneToOne
+    private Person person;
 
     /* Getters for the User */
 
@@ -32,19 +33,23 @@ public class User {
 
     /* Setters for the User */
 
-    public void setLogin(String login) {
+    public User setLogin(String login) {
         this.login = login;
+        return this;
     }
 
-    public void setPasswordHash(String passwordHash) {
+    public User setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+        return this;
     }
 
-    public void setActive(Boolean active) {
+    public User setActive(Boolean active) {
         this.active = active;
+        return this;
     }
 
-    public void setPerson(Person person) {
+    public User setPerson(Person person) {
         this.person = person;
+        return this;
     }
 }
