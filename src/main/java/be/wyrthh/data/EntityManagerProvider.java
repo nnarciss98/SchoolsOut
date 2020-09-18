@@ -11,11 +11,11 @@ public class EntityManagerProvider {
 
     private static EntityManagerFactory emf;
 
-    public EntityManagerProvider() {
-        if (emf != null) emf = Persistence.createEntityManagerFactory("persistence");
+    public EntityManagerProvider() { emf = Persistence.createEntityManagerFactory("persistence");
     }
 
     public static EntityManager getEM(){
         return emf.createEntityManager();
     }
+
 }

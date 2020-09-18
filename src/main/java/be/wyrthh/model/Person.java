@@ -1,7 +1,5 @@
 package be.wyrthh.model;
 
-import be.wyrthh.data.Gender;
-
 import javax.persistence.*;
 
 @Entity

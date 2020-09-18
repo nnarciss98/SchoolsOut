@@ -1,4 +1,4 @@
-package be.wyrthh.data;
+package be.wyrthh.model;
 
 public enum Gender {
 
