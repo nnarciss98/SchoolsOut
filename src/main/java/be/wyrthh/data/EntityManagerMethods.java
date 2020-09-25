@@ -9,7 +9,7 @@ public class EntityManagerMethods {
     /**
      * Merges the given object and commits the transaction
      * @param object
-     *          Object to be merged.
+     *          Object to be merged to the database.
      */
     public void mergeTransaction(Object object){
         EntityManager em = EntityManagerProvider.getEM();
@@ -22,7 +22,7 @@ public class EntityManagerMethods {
     /**
      * Persists the object and commits the transaction.
      * @param object
-     *          Object to be persisted.
+     *          Object to be persisted to the database.
      */
     public void persistTransaction(Object object){
         EntityManager em = EntityManagerProvider.getEM();
@@ -32,7 +32,11 @@ public class EntityManagerMethods {
         em.close();
     }
 
-
+    /**
+     * Deletes the object and commits the transaction
+     * @param object
+     *          Object to be deleted from the database.
+     */
     public void deleteTransaction(Object object) {
         EntityManager em = EntityManagerProvider.getEM();
         em.getTransaction().begin();
