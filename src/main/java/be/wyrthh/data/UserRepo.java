@@ -1,7 +1,6 @@
 package be.wyrthh.data;
 
 import be.wyrthh.model.User;
-import be.wyrthh.service.EntityChecker;
 import org.hibernate.TransactionException;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ public class UserRepo {
 
     /* Instances of objects containing the validation methods and entity manager methods to interact with the database */
     EntityManagerMethods emMethods = new EntityManagerMethods();
-    EntityChecker eCheck = new EntityChecker();
 
     /**
      * Insert User into the database.
@@ -36,13 +34,14 @@ public class UserRepo {
     }
 
     /**
-     * Update the User entity in the database, if the User entity doesn't exist in the database it will be added to the database,
-     * if it already exists in the database it will be updated with the new properties.
+     * Update the User entity in the database, if the User entity doesn't exist in the database it will be added to the database.
      * @param user
      *          Entity to be updated.
      */
     public void updateUser (User user){
-        emMethods.mergeTransaction(user);
+        if (getUserByLogin(user.getLogin()) != null) {
+            emMethods.mergeTransaction(user);
+        }
     }
 
     /**
@@ -55,7 +54,7 @@ public class UserRepo {
      *          Throw exception if there isn't a User object with the same ID in the database.
      */
     public Boolean deleteUser (User user) throws TransactionException{
-        if (eCheck.checkIfUserExists(user)){
+        if (getUserByLogin(user.getLogin()) == null){
             throw new TransactionException("The User you are looking for is not to be found (maybe they deleted themselves when they realised what you were going to do...)");
         }
         else {

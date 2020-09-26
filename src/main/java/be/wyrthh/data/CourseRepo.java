@@ -1,7 +1,6 @@
 package be.wyrthh.data;
 
 import be.wyrthh.model.Course;
-import be.wyrthh.service.EntityChecker;
 import org.hibernate.TransactionException;
 
 import javax.persistence.EntityManager;
@@ -9,7 +8,6 @@ import javax.persistence.EntityManager;
 public class CourseRepo {
 
     EntityManagerMethods emMethods = new EntityManagerMethods();
-    EntityChecker eCheck = new EntityChecker();
 
     /**
      * Inserts the given course in the database.
@@ -38,13 +36,12 @@ public class CourseRepo {
     }
 
     /**
-     * Update the course entity.
-     * If the given course isn't in the database it will do nothing.
+     * Update the course entity in the database, if the course entity doesn't exist in the database it will be added to the database.
      * @param course
      *          Course to be updated.
      */
     public void updateCourse(Course course){
-        if(eCheck.checkIfCourseExists(course)) {
+        if(getCourseById(course.getId()) != null) {
             emMethods.mergeTransaction(course);
         }
     }
@@ -59,7 +56,7 @@ public class CourseRepo {
      *          Thrown exception if the course doesn't exist in the database
      */
     public Boolean deleteCourse(Course course) throws TransactionException{
-        if(eCheck.checkIfCourseExists(course) == null){
+        if(getCourseById(course.getId()) == null){
             throw new TransactionException("Course not found, try again.");
         }
         else{

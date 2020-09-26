@@ -1,7 +1,6 @@
 package be.wyrthh.data;
 
 import be.wyrthh.model.Person;
-import be.wyrthh.service.EntityChecker;
 import org.hibernate.TransactionException;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ public class PersonRepo {
 
     /* Instances of objects containing the validation methods and entity manager methods to interact with the database */
     EntityManagerMethods emMethods = new EntityManagerMethods();
-    EntityChecker eCheck = new EntityChecker();
 
 
     /**
@@ -37,13 +35,14 @@ public class PersonRepo {
     }
 
     /**
-     * Update the person entity in the database, if the person entity doesn't exist in the database it will be added to the database,
-     * if it already exists in the database it will be updated with the new properties.
+     * Update the person entity in the database, if the person entity doesn't exist in the database it will be added to the database.
      * @param person
      *          Entity to be updated.
      */
     public void updatePerson (Person person){
-        emMethods.mergeTransaction(person);
+        if (getPersonById(person.getId()) != null) {
+            emMethods.mergeTransaction(person);
+        }
     }
 
     /**
@@ -56,7 +55,7 @@ public class PersonRepo {
      *          Throw exception if there isn't a person object with the same ID in the database.
      */
     public Boolean deletePerson (Person person) throws TransactionException{
-        if (eCheck.checkIfPersonExists(person)){
+        if (getPersonById(person.getId()) == null){
             throw new TransactionException("The person you are looking for is not to be found (maybe they deleted themselves when they realised what you were going to do...)");
         }
         else {

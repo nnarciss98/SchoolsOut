@@ -1,8 +1,6 @@
 package be.wyrthh.data;
 
 import be.wyrthh.model.Grade;
-import be.wyrthh.model.Grade;
-import be.wyrthh.service.EntityChecker;
 import org.hibernate.TransactionException;
 
 import javax.persistence.EntityManager;
@@ -11,7 +9,6 @@ public class GradeRepo {
 
     /* Instances of objects containing the validation methods and entity manager methods to interact with the database */
     EntityManagerMethods emMethods = new EntityManagerMethods();
-    EntityChecker eCheck = new EntityChecker();
 
 
     /**
@@ -38,13 +35,14 @@ public class GradeRepo {
     }
 
     /**
-     * Update the grade entity in the database, if the grade entity doesn't exist in the database it will be added to the database,
-     * if it already exists in the database it will be updated with the new properties.
+     * Update the grade entity in the database, if the grade entity doesn't exist in the database it will be added to the database.
      * @param grade
      *          Entity to be updated.
      */
     public void updateGrade (Grade grade){
-        emMethods.mergeTransaction(grade);
+        if (getGradeById(grade.getId()) != null) {
+            emMethods.mergeTransaction(grade);
+        }
     }
 
     /**
@@ -57,7 +55,7 @@ public class GradeRepo {
      *          Throw exception if there isn't a grade object with the same ID in the database.
      */
     public Boolean deleteGrade (Grade grade) throws TransactionException{
-        if (eCheck.checkIfGradeExists(grade)){
+        if (getGradeById(grade.getId()) == null){
             throw new TransactionException("The grade you are looking for is not to be found (maybe they deleted themselves when they realised what you were going to do...)");
         }
         else {

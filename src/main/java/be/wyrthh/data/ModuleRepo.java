@@ -1,7 +1,6 @@
 package be.wyrthh.data;
 
 import be.wyrthh.model.Module;
-import be.wyrthh.service.EntityChecker;
 import org.hibernate.TransactionException;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ public class ModuleRepo {
 
     /* Instances of objects containing the validation methods and entity manager methods to interact with the database */
     EntityManagerMethods emMethods = new EntityManagerMethods();
-    EntityChecker eCheck = new EntityChecker();
 
 
     /**
@@ -37,13 +35,14 @@ public class ModuleRepo {
     }
 
     /**
-     * Update the module entity in the database, if the module entity doesn't exist in the database it will be added to the database,
-     * if it already exists in the database it will be updated with the new properties.
+     * Update the module entity in the database, if the module entity doesn't exist in the database it will be added to the database.
      * @param module
      *          Entity to be updated.
      */
     public void updatemodule (Module module){
-        emMethods.mergeTransaction(module);
+        if (getmoduleById(module.getId()) != null) {
+            emMethods.mergeTransaction(module);
+        }
     }
 
     /**
@@ -56,7 +55,7 @@ public class ModuleRepo {
      *          Throw exception if there isn't a module object with the same ID in the database.
      */
     public Boolean deletemodule (Module module) throws TransactionException{
-        if (eCheck.checkIfModuleExists(module)){
+        if (getmoduleById(module.getId()) == null){
             throw new TransactionException("The module you are looking for is not to be found (maybe they deleted themselves when they realised what you were going to do...)");
         }
         else {

@@ -1,7 +1,6 @@
 package be.wyrthh.data;
 
 import be.wyrthh.model.Exam;
-import be.wyrthh.service.EntityChecker;
 import org.hibernate.TransactionException;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ public class ExamRepo {
 
     /* Instances of objects containing the validation methods and entity manager methods to interact with the database */
     EntityManagerMethods emMethods = new EntityManagerMethods();
-    EntityChecker eCheck = new EntityChecker();
 
 
     /**
@@ -37,13 +35,14 @@ public class ExamRepo {
     }
 
     /**
-     * Update the exam entity in the database, if the exam entity doesn't exist in the database it will be added to the database,
-     * if it already exists in the database it will be updated with the new properties.
+     * Update the exam entity in the database, if the exam entity doesn't exist in the database it will be added to the database.
      * @param exam
      *          Entity to be updated.
      */
     public void updateExam (Exam exam){
-        emMethods.mergeTransaction(exam);
+        if (getExamById(exam.getId()) != null) {
+            emMethods.mergeTransaction(exam);
+        }
     }
 
     /**
@@ -56,7 +55,7 @@ public class ExamRepo {
      *          Throw exception if there isn't a exam object with the same ID in the database.
      */
     public Boolean deleteExam (Exam exam) throws TransactionException{
-        if (eCheck.checkIfExamExists(exam)){
+        if (getExamById(exam.getId()) == null){
             throw new TransactionException("The exam you are looking for is not to be found (maybe they deleted themselves when they realised what you were going to do...)");
         }
         else {
