@@ -109,5 +109,26 @@ public class EntityChecker {
     }
 
 
+    /* Instance of UserRepo to use methods from that class */
+    GradeRepo gradeRepo = new GradeRepo();
+
+    /**
+     * Check if the given user exists in the database.
+     * @param grade
+     *          User entity that we'll look up in the database.
+     * @return
+     *          True if the user exists in the database.
+     *          False if the user doesn't exist in the database.
+     */
+    public Boolean checkIfGradeExists(Grade grade){
+        if(gradeRepo.getGradeById(grade.getId()) == null){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+
 
 }

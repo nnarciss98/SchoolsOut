@@ -11,6 +11,7 @@ public class Person {
     int id;
     String firstName;
     String familyName;
+    @Enumerated(EnumType.STRING)
     Gender gender;
     @ManyToOne
     Course course;
