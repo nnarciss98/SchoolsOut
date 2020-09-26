@@ -1,6 +1,7 @@
 package be.wyrthh.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -14,7 +15,9 @@ public class Person {
     @Enumerated(EnumType.STRING)
     Gender gender;
     @ManyToOne
-    Course course;
+    Course activeCourse;
+    @ManyToMany
+    List<Course> courseHistory;
 
     /* Getters for Person */
 
@@ -34,8 +37,12 @@ public class Person {
         return gender;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getActiveCourse() {
+        return activeCourse;
+    }
+
+    public List<Course> getCourseHistory() {
+        return courseHistory;
     }
 
     /* Setters for person */
@@ -60,8 +67,13 @@ public class Person {
         return this;
     }
 
-    public Person setCourse(Course course) {
-        this.course = course;
+    public Person setActiveCourse(Course course) {
+        this.activeCourse = course;
+        return this;
+    }
+
+    public Person setCourseHistory(List<Course> courseHistory) {
+        this.courseHistory = courseHistory;
         return this;
     }
 }

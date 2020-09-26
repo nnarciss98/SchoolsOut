@@ -4,6 +4,7 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "exam")
@@ -19,6 +20,10 @@ public class Exam {
     int total;
     @ManyToOne
     Exam module;
+    @ManyToOne
+    Exam examGroup;
+    @OneToMany
+    List<Exam> subExams;
 
     /* Getters for the Exam object */
 
@@ -84,5 +89,20 @@ public class Exam {
     public Exam setModule(Exam module) {
         this.module = module;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", weight=" + weight +
+                ", total=" + total +
+                ", module=" + module +
+                ", examGroup=" + examGroup +
+                ", subExams=" + subExams +
+                '}';
     }
 }
