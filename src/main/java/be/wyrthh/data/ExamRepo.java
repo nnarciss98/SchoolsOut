@@ -35,7 +35,7 @@ public class ExamRepo {
     }
 
     /**
-     * Update the exam entity in the database, if the exam entity doesn't exist in the database it will be added to the database.
+     * Update the exam entity in the database, if the exam entity doesn't exist in the database it will be added to the database."
      * @param exam
      *          Entity to be updated.
      */

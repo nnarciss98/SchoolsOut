@@ -1,7 +1,9 @@
 package be.wyrthh.view;
 
 import be.wyrthh.data.*;
+import be.wyrthh.model.Exam;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class UserInteraction {
@@ -66,6 +68,11 @@ public class UserInteraction {
 
     }
 
+    /**
+     * This method contains all the interactions related to exam entities
+     * @param keyboard
+     *          The already existing scanner, that way we won't need to create a new scanner object each time :)
+     */
     private void examRelatedInteractions(Scanner keyboard) {
         ExamRepo examRepo = new ExamRepo();
         printOptions();
@@ -74,17 +81,68 @@ public class UserInteraction {
             // Case where the user wants to create a new exam object and add it to the DB
             case 1:
                 //TODO finish this up, and the rest of the cases
+                System.out.println("So... Form filling time :)");
+                System.out.println("Name: ");
+                String examName = keyboard.nextLine();
+                System.out.println("Description: ");
+                String examDescription = keyboard.nextLine();
+                System.out.println("Date: ");
+                System.out.println("- Year:");
+                int year = keyboard.nextInt();
+                System.out.println("- Month: ");
+                int month = keyboard.nextInt();
+                System.out.println("- Day: ");
+                int day = keyboard.nextInt();
+                LocalDate dateExam = LocalDate.of(year, month, day);
+                System.out.println("Weight: ");
+                int weightExam = keyboard.nextInt();
+                System.out.println("Total: ");
+                int totalExam = keyboard.nextInt();
+
+                Exam newExam = new Exam()
+                        .setName(examName)
+                        .setDescription(examDescription)
+                        .setDate(dateExam)
+                        .setWeight(weightExam)
+                        .setTotal(totalExam);
                 examRepo.insertExam(newExam);
                 break;
             //Case where the user wants to get an exam from the database
             case 2:
-                System.out.printf("For now you can retrieve exams from the database only if you have the exam ID");
-                System.out.printf("What is the ID of the exam you want to get?");
+                System.out.println("For now you can retrieve exams from the database only if you have the exam ID");
+                System.out.println("What is the ID of the exam you want to get?");
                 long examID = keyboard.nextLong();
                 examRepo.getExamById(examID).toString();
                 break;
+            // We give the user the possibility to select what wants to be updated
+            // Then depending on what the user chose, we give the user the possibility to change what they chose
+            // If the user wants to change multiple things, they have to go back to the beginning of the menu each time they want to change another characteristic
+            //          (Sorry, I'm not gonna spend even more time trying to do that, I already know how to, and it's just going to uselessly consume my time :P)
+            case 3:
+                System.out.printf("What is the ID of the exam you want to update?");
+                long neededExamID = keyboard.nextLong();
+                Exam examToBeUpdated = examRepo.getExamById(neededExamID);
+                System.out.println("What do you want to update?");
+                System.out.println("(1) Name");
+                System.out.println("(2) Description");
+                System.out.println("(3) Weight");
+                System.out.println("(4) Total");
+                int userUpdateSelection = keyboard.nextInt();
+                // Here we update the name of the exam
+                if (userUpdateSelection == 1){
+                    System.out.println("What is the new name you want to give the exam?");
+                    String nameOfTheUpdatedExam = keyboard.nextLine();
+                    examToBeUpdated.setName(nameOfTheUpdatedExam);
+                    examRepo.updateExam(examToBeUpdated);
+                }
+                break;
+            // Delete the exam the user chooses
+            case 4:
+                System.out.printf("What is the ID of the exam you want to delete?");
+                long examToBeDeletedID = keyboard.nextLong();
+                examRepo.deleteExam(examRepo.getExamById(examToBeDeletedID));
+                break;
         }
-
     }
 
     private void gradeRelatedInteractions(Scanner keyboard) {

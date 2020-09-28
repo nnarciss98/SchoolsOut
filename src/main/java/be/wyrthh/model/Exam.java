@@ -55,6 +55,14 @@ public class Exam {
         return module;
     }
 
+    public Exam getExamGroup() {
+        return examGroup;
+    }
+
+    public List<Exam> getSubExams() {
+        return subExams;
+    }
+
     /* Setters for the Exam object */
 
     public Exam setId(long id) {
@@ -62,8 +70,9 @@ public class Exam {
         return this;
     }
 
-    public void setName(String name) {
+    public Exam setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Exam setDescription(String description) {
@@ -88,6 +97,16 @@ public class Exam {
 
     public Exam setModule(Exam module) {
         this.module = module;
+        return this;
+    }
+
+    public Exam setExamGroup(Exam examGroup) {
+        this.examGroup = examGroup;
+        return this;
+    }
+
+    public Exam setSubExams(List<Exam> subExams) {
+        this.subExams = subExams;
         return this;
     }
 
