@@ -86,4 +86,17 @@ public class Course {
         this.modules = modules;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", code='" + code + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                ", active=" + active +
+                ", modules=" + modules +
+                '}';
+    }
 }

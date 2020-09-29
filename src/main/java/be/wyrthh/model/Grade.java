@@ -106,4 +106,19 @@ public class Grade {
         this.date = date;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Grade{" +
+                "id=" + id +
+                ", person=" + person +
+                ", exam=" + exam +
+                ", gradeValue=" + gradeValue +
+                ", comment='" + comment + '\'' +
+                ", internalComment='" + internalComment + '\'' +
+                ", absent=" + absent +
+                ", postponed=" + postponed +
+                ", date=" + date +
+                '}';
+    }
 }

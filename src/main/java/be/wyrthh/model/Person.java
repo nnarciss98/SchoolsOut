@@ -76,4 +76,16 @@ public class Person {
         this.courseHistory = courseHistory;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", gender=" + gender +
+                ", activeCourse=" + activeCourse +
+                ", courseHistory=" + courseHistory +
+                '}';
+    }
 }

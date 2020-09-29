@@ -52,4 +52,14 @@ public class User {
         this.person = person;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", active=" + active +
+                ", person=" + person +
+                '}';
+    }
 }

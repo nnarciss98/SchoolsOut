@@ -2,6 +2,7 @@ package be.wyrthh.view;
 
 import be.wyrthh.data.*;
 import be.wyrthh.model.Exam;
+import be.wyrthh.model.User;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -119,7 +120,7 @@ public class UserInteraction {
             // If the user wants to change multiple things, they have to go back to the beginning of the menu each time they want to change another characteristic
             //          (Sorry, I'm not gonna spend even more time trying to do that, I already know how to, and it's just going to uselessly consume my time :P)
             case 3:
-                System.out.printf("What is the ID of the exam you want to update?");
+                System.out.printf("ID of the exam you want to update: ");
                 long neededExamID = keyboard.nextLong();
                 Exam examToBeUpdated = examRepo.getExamById(neededExamID);
                 System.out.println("What do you want to update?");
@@ -160,9 +161,50 @@ public class UserInteraction {
         printOptions();
     }
 
+    /**
+     * This method contains all the interactions related to user entities
+     * @param keyboard
+     *          The already existing scanner, that way we won't need to create a new scanner object each time :)
+     */
     private void userRelatedInteractions(Scanner keyboard) {
         UserRepo userRepo = new UserRepo();
         printOptions();
+        int userInput = keyboard.nextInt();
+        switch (userInput){
+            //Create entity
+            case 1:
+                System.out.println("User Login: ");
+                String userLogin = keyboard.nextLine();
+                System.out.println("User password hash: (I know that this formulated this way sounds stupid, but it's just a proof of concept)");
+                String passHashUser = keyboard.nextLine();
+                //Each user starts as active (otherwise why would you make one?)
+                Boolean activeUser = true;
+
+            //Read entity
+            case 2:
+                System.out.println("Login of the user you are looking for: ");
+                String loginInput = keyboard.nextLine();
+                userRepo.getUserByLogin(loginInput).toString();
+
+            //Update entity
+            case 3:
+                System.out.println("Login of the user you want to update: ");
+                String loginUserToBeUpdated = keyboard.nextLine();
+                User userToBeUpdated = userRepo.getUserByLogin(loginUserToBeUpdated);
+                System.out.println("Is the person still active?");
+                System.out.println("(1) Yes");
+                System.out.println("(2) No");
+                int isUserActive = keyboard.nextInt();
+                userToBeUpdated.setActive((isUserActive == 1 ) ? true : false);
+                System.out.println("There should be an option to also update the person of the user, nog gonna complicate it for now as this is just a proof of concept.");
+                userRepo.updateUser(userToBeUpdated);
+
+            //Delete entity
+            case 4:
+                System.out.println("Login of the user you want to delete: ");
+                String userToBeDeleted = keyboard.nextLine();
+                userRepo.deleteUser(userRepo.getUserByLogin(userToBeDeleted));
+        }
     }
 
     /**
