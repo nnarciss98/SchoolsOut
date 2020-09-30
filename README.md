@@ -1,5 +1,8 @@
 # SchoolsOut
 
+This project is to showcase JPA/Hibernate. Using JPA/Hibernate we communicate with a database and we manage a DB containing students, courses and exams.
+
+
 Project started.
 
   - [x] Part 0: Done on paper, maybe I'll upload it too if necessary
